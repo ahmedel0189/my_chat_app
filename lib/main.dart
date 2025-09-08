@@ -1,13 +1,20 @@
+import 'package:a_chat/helpers/app_router.dart';
 import 'package:flutter/material.dart';
 
 class AChat extends StatelessWidget {
-  const AChat({super.key});
+  final AppRouter appRouter;
+
+  const AChat({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: appRouter.generateroute,
+    );
   }
 }
+
 void main() {
-  runApp(const AChat());
+  runApp( AChat(appRouter: AppRouter(),));
 }
