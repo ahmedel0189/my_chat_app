@@ -1,5 +1,6 @@
 import 'package:a_chat/constants/my_string.dart';
 import 'package:a_chat/layers/ui/screens/login_screen.dart';
+import 'package:a_chat/layers/ui/screens/sign_up_screens.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -9,6 +10,10 @@ class AppRouter {
       case loginScreenroute:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),
+        );
+      case signUpScreenroute:
+        return MaterialPageRoute(
+          builder: (_) => SignUpScreens(),
         );
     }
   }

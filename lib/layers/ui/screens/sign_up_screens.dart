@@ -2,8 +2,8 @@ import 'package:a_chat/constants/my_color.dart';
 import 'package:a_chat/layers/ui/widgets/widgets_of_login.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreens extends StatelessWidget {
+  const SignUpScreens({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Log in',
+                'Sign Up',
                 style: TextStyle(
                   color: MyColor.myTextColor,
                   fontSize: 25,
@@ -40,12 +40,14 @@ class LoginScreen extends StatelessWidget {
               'Password',
               'Enter Your Password..',
             ),
+            SizedBox(height: 10),
+            WidgetsOfLogin().buildLoginFiled(
+              'Confirm Password',
+              'Confirm Password..',
+            ),
             SizedBox(height: 20),
             WidgetsOfLogin().buildLoginButton(
-              'Log in',
-            ),
-            WidgetsOfLogin().buildSignUpText(
-              context,
+              'Sign UP',
             ),
           ],
         ),

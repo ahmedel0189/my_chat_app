@@ -1,7 +1,29 @@
 import 'package:a_chat/constants/my_color.dart';
+import 'package:a_chat/constants/my_string.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsOfLogin {
+  Widget buildLogo() {
+    return Center(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/scholar.png',
+          ),
+          Text(
+            'Scholar Chat',
+            style: TextStyle(
+              color: MyColor.myTextColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Pacifico',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget buildLoginFiled(
     String labelText,
     String hintText,
@@ -41,7 +63,7 @@ class WidgetsOfLogin {
     );
   }
 
-  Widget buildLoginButton() {
+  Widget buildLoginButton(String buttomText) {
     return SizedBox(
       width: double
           .infinity, // يخلي الزر بعرض الشاشة
@@ -66,12 +88,12 @@ class WidgetsOfLogin {
             ), // زر مربع
           ),
         ),
-        child: Text("Login"),
+        child: Text(buttomText),
       ),
     );
   }
 
-  Widget buildSignUpText() {
+  Widget buildSignUpText(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -81,9 +103,13 @@ class WidgetsOfLogin {
             color: MyColor.mySecondaryTextColor,
           ),
         ),
-        InkWell(
+        GestureDetector(
           onTap: () {
             // print("Sign Up Clicked");
+            Navigator.pushNamed(
+              context,
+              signUpScreenroute,
+            );
           },
           child: Text(
             "Sign Up",
