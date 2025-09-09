@@ -93,12 +93,52 @@ class WidgetsOfLogin {
     );
   }
 
-  Widget buildSignUpText(BuildContext context) {
+  Widget buildLogInSignUpText(
+    BuildContext context,
+    String serviceText,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "don't have an account ",
+          serviceText == 'Log In'
+              ? "Already have an account?"
+              : "Don't have an account?",
+
+          style: TextStyle(
+            color: MyColor.mySecondaryTextColor,
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            // print("Sign Up Clicked");
+            if (serviceText == 'Log In') {
+              Navigator.pushNamed(
+                context,
+                loginScreenroute,
+              );
+            } else if (serviceText == 'Sign up') {
+              Navigator.pop(context);
+            }
+          },
+          child: Text(
+            serviceText,
+            style: TextStyle(
+              color: MyColor.myHighlightColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildLoginText(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "already have an account  ",
           style: TextStyle(
             color: MyColor.mySecondaryTextColor,
           ),

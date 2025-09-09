@@ -44,8 +44,9 @@ class LoginScreen extends StatelessWidget {
             WidgetsOfLogin().buildLoginButton(
               'Log in',
             ),
-            WidgetsOfLogin().buildSignUpText(
+            WidgetsOfLogin().buildLogInSignUpText(
               context,
+              'Sign up',
             ),
           ],
         ),

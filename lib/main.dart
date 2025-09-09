@@ -1,4 +1,6 @@
+import 'package:a_chat/firebase_options.dart';
 import 'package:a_chat/helpers/app_router.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AChat extends StatelessWidget {
@@ -15,6 +17,9 @@ class AChat extends StatelessWidget {
   }
 }
 
-void main() {
+void main()async {
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp( AChat(appRouter: AppRouter(),));
 }
