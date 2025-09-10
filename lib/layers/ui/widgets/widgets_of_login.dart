@@ -1,5 +1,5 @@
-import 'package:a_chat/constants/my_color.dart';
-import 'package:a_chat/constants/my_string.dart';
+import '../../../constants/my_color.dart';
+import '../../../constants/my_string.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsOfLogin {
@@ -27,8 +27,10 @@ class WidgetsOfLogin {
   Widget buildLoginFiled(
     String labelText,
     String hintText,
+    Function(String)? onChanged,
   ) {
     return TextField(
+      onChanged: onChanged!,
       decoration: InputDecoration(
         labelStyle: TextStyle(
           color: MyColor.myTextColor,
@@ -63,16 +65,16 @@ class WidgetsOfLogin {
     );
   }
 
-  Widget buildLoginButton(String buttomText) {
+  Widget buildLoginButton(
+    String buttomText,
+    VoidCallback? onTap,
+  ) {
     return SizedBox(
       width: double
           .infinity, // يخلي الزر بعرض الشاشة
       height: 50, // يخلي الزر أطول شوية
       child: ElevatedButton(
-        onPressed: () {
-          // هنا هتكتب الأكشن بتاع تسجيل الدخول
-          // print("Login Pressed");
-        },
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor:
               MyColor.myTextColor, // لون الخلفية
@@ -112,47 +114,17 @@ class WidgetsOfLogin {
         GestureDetector(
           onTap: () {
             // print("Sign Up Clicked");
-            if (serviceText == 'Log In') {
+            if (serviceText == 'Sign up') {
               Navigator.pushNamed(
                 context,
-                loginScreenroute,
+                signUpScreenroute,
               );
-            } else if (serviceText == 'Sign up') {
+            } else {
               Navigator.pop(context);
             }
           },
           child: Text(
             serviceText,
-            style: TextStyle(
-              color: MyColor.myHighlightColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildLoginText(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "already have an account  ",
-          style: TextStyle(
-            color: MyColor.mySecondaryTextColor,
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            // print("Sign Up Clicked");
-            Navigator.pushNamed(
-              context,
-              signUpScreenroute,
-            );
-          },
-          child: Text(
-            "Sign Up",
             style: TextStyle(
               color: MyColor.myHighlightColor,
               fontWeight: FontWeight.bold,

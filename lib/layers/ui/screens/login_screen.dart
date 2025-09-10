@@ -1,5 +1,5 @@
-import 'package:a_chat/constants/my_color.dart';
-import 'package:a_chat/layers/ui/widgets/widgets_of_login.dart';
+import '../../../constants/my_color.dart';
+import '../widgets/widgets_of_login.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -34,15 +34,18 @@ class LoginScreen extends StatelessWidget {
             WidgetsOfLogin().buildLoginFiled(
               'Email',
               'Enter Your Email..',
+              (email) {},
             ),
             SizedBox(height: 10),
             WidgetsOfLogin().buildLoginFiled(
               'Password',
               'Enter Your Password..',
+              (email) {},
             ),
             SizedBox(height: 20),
             WidgetsOfLogin().buildLoginButton(
               'Log in',
+              () {},
             ),
             WidgetsOfLogin().buildLogInSignUpText(
               context,
