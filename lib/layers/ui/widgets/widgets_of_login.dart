@@ -24,12 +24,14 @@ class WidgetsOfLogin {
     );
   }
 
-  Widget buildLoginFiled(
-    String labelText,
-    String hintText,
+  Widget buildLoginFiled({
+    TextEditingController? controller,
+    String? labelText,
+    String? hintText,
     Function(String)? onChanged,
-  ) {
+  }) {
     return TextField(
+      controller: controller,
       onChanged: onChanged!,
       decoration: InputDecoration(
         labelStyle: TextStyle(
@@ -66,9 +68,9 @@ class WidgetsOfLogin {
   }
 
   Widget buildLoginButton(
-    String buttomText,
-    VoidCallback? onTap,
-  ) {
+    String buttomText, {
+    required VoidCallback? onTap,
+  }) {
     return SizedBox(
       width: double
           .infinity, // يخلي الزر بعرض الشاشة
@@ -106,7 +108,6 @@ class WidgetsOfLogin {
           serviceText == 'Log In'
               ? "Already have an account?"
               : "Don't have an account?",
-
           style: TextStyle(
             color: MyColor.mySecondaryTextColor,
           ),
@@ -132,6 +133,15 @@ class WidgetsOfLogin {
           ),
         ),
       ],
+    );
+  }
+
+  void buildScaffoldMessenger(
+    BuildContext context,
+    String textMessage,
+  ) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(textMessage)),
     );
   }
 }

@@ -6,8 +6,15 @@ import '../../../constants/my_color.dart';
 import '../widgets/widgets_of_login.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SignUpScreens extends StatelessWidget {
-  const SignUpScreens({super.key});
+  final emailController = TextEditingController();
+  final passwordController =
+      TextEditingController();
+  final confirmPasswordController =
+      TextEditingController();
+  WidgetsOfLogin? widgetsOfLogin;
+  SignUpScreens({super.key, this.widgetsOfLogin});
 
   @override
   Widget build(BuildContext context) {
@@ -41,32 +48,37 @@ class SignUpScreens extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 WidgetsOfLogin().buildLoginFiled(
-                  'Email',
-                  'Enter Your Email..',
-                  (email) {
+                  controller: emailController,
+                  labelText: 'Email',
+                  hintText: 'Enter Your Email..',
+                  onChanged: (email) {
                     emailAddress = email;
                   },
                 ),
                 SizedBox(height: 10),
                 WidgetsOfLogin().buildLoginFiled(
-                  'Password',
-                  'Enter Your Password..',
-                  (password) {
+                  controller: passwordController,
+                  labelText: 'Password',
+                  hintText:
+                      'Enter Your Password..',
+                  onChanged: (password) {
                     passWord = password;
                   },
                 ),
                 SizedBox(height: 10),
                 WidgetsOfLogin().buildLoginFiled(
-                  'Confirm Password',
-                  'Confirm Password..',
-                  (data) {
+                  controller:
+                      confirmPasswordController,
+                  labelText: 'Confirm Password',
+                  hintText: 'Confirm Password..',
+                  onChanged: (data) {
                     passWord = data;
                   },
                 ),
                 SizedBox(height: 20),
                 WidgetsOfLogin().buildLoginButton(
                   'Sign up',
-                  () async {
+                  onTap: () async {
                     // ignore: unused_local_variable
                     try {
                       final _ = await FirebaseAuth
@@ -75,31 +87,43 @@ class SignUpScreens extends StatelessWidget {
                             email: emailAddress!,
                             password: passWord!,
                           );
+                      if (passwordController
+                          .text
+                          .isEmpty) {
+                        widgetsOfLogin!
+                            .buildScaffoldMessenger(
+                              context,
+                              '⚠️ Please enter a password',
+                            );
+                        return;
+                      }
+                      if (confirmPasswordController
+                          .text
+                          .isEmpty) {
+                        widgetsOfLogin!
+                            .buildScaffoldMessenger(
+                              context,
+                              '⚠️ Please confirm the password',
+                            );
+                        return;
+                      }
                     } on FirebaseAuthException catch (
                       e
                     ) {
                       if (e.code ==
                           'weak-password') {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(
-                          const SnackBar(
-                            content: Text(
+                        widgetsOfLogin!
+                            .buildScaffoldMessenger(
+                              context,
                               '❌ Password must be at least 6 characters.',
-                            ),
-                          ),
-                        );
+                            );
                       } else if (e.code ==
                           'email-already-in-use') {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(
-                          const SnackBar(
-                            content: Text(
+                        widgetsOfLogin!
+                            .buildScaffoldMessenger(
+                              context,
                               'The account already exists for that email.',
-                            ),
-                          ),
-                        );
+                            );
                       }
                     }
                   },

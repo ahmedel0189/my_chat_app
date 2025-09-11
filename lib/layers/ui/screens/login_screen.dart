@@ -3,7 +3,9 @@ import '../widgets/widgets_of_login.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final controller = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +34,23 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             WidgetsOfLogin().buildLoginFiled(
-              'Email',
-              'Enter Your Email..',
-              (email) {},
+              controller: controller,
+              labelText: 'Email',
+              hintText: 'Enter Your Email..',
+              onChanged: (email) {},
             ),
             SizedBox(height: 10),
             WidgetsOfLogin().buildLoginFiled(
-              'Password',
-              'Enter Your Password..',
-              (email) {},
+              controller: controller,
+              labelText: 'Password',
+              hintText: 'Enter Your Password..',
+              // ignore: non_constant_identifier_names
+              onChanged: (Password) {},
             ),
             SizedBox(height: 20),
             WidgetsOfLogin().buildLoginButton(
               'Log in',
-              () {},
+              onTap: () {},
             ),
             WidgetsOfLogin().buildLogInSignUpText(
               context,
