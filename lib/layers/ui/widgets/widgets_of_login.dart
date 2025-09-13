@@ -29,10 +29,39 @@ class WidgetsOfLogin {
     String? labelText,
     String? hintText,
     Function(String)? onChanged,
+    TextEditingController? passwordController,
   }) {
-    return TextField(
+    return TextFormField(
+      validator: (data) {
+        if (data == null || data.isEmpty) {
+          return '$labelText is required';
+        }
+        if (labelText == 'Email') {
+          // regex للتحقق من صيغة الإيميل
+          final emailRegex = RegExp(
+            r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+          );
+          if (!emailRegex.hasMatch(data)) {
+            return 'Please enter a valid email address';
+          }
+        }
+        if (labelText == 'Password') {
+          if (data.length < 6) {
+            return 'Password must be at least 6 characters';
+          }
+        }
+        if (labelText == 'confirm Password') {
+          if (passwordController == null) {
+            return 'Password is required';
+          }
+          if (data != passwordController.text) {
+            return 'Passwords do not match';
+          }
+        }
+        return null;
+      },
       controller: controller,
-      onChanged: onChanged!,
+      onChanged: onChanged,
       decoration: InputDecoration(
         labelStyle: TextStyle(
           color: MyColor.myTextColor,

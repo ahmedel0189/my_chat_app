@@ -13,7 +13,7 @@ class AppRouter {
         );
       case signUpScreenroute:
         return MaterialPageRoute(
-          builder: (_) => SignUpScreens(),
+          builder: (_) => const SignUpScreens(),
         );
       // default:
       //   return MaterialPageRoute(
