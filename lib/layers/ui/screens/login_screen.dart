@@ -95,6 +95,9 @@ class _LoginScreenState
                       onTap: () async {
                         if (formKey.currentState!
                             .validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
                           try {
                             await FirebaseAuth
                                 .instance
@@ -148,6 +151,9 @@ class _LoginScreenState
                                   errorMessage,
                                 );
                           }
+                          setState(() {
+                            isLoading = false;
+                          });
                         }
                       },
                     ),
