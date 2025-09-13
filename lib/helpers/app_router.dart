@@ -1,3 +1,5 @@
+import 'package:a_chat/layers/ui/screens/home_page_screen.dart';
+
 import '../constants/my_string.dart';
 import '../layers/ui/screens/login_screen.dart';
 import '../layers/ui/screens/sign_up_screens.dart';
@@ -15,14 +17,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SignUpScreens(),
         );
-      // default:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const Scaffold(
-      //       body: Center(
-      //         child: Text("No route defined"),
-      //       ),
-      //     ),
-      //   );
+      case homePageroute:
+        return MaterialPageRoute(
+          builder: (_) => const HomePageScreen(),
+        );
     }
   }
 }

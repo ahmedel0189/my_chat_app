@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:a_chat/constants/my_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -29,7 +30,7 @@ class _SignUpScreensState
   String? passWord;
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
-  
+
   @override
   void dispose() {
     emailController.dispose();
@@ -140,6 +141,10 @@ class _SignUpScreensState
                                   context,
                                   '✅ Account created successfully',
                                 );
+                            Navigator.pushNamed(
+                              context,
+                              homePageroute,
+                            );
                           } on FirebaseAuthException catch (
                             e
                           ) {

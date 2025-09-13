@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:a_chat/constants/my_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -112,12 +115,21 @@ class _LoginScreenState
                                           .trim(),
                                 );
                             if (!mounted) return;
+                            await Future.delayed(
+                              const Duration(
+                                seconds: 1,
+                              ),
+                            );
                             WidgetsOfLogin()
                                 .buildScaffoldMessenger(
-                                  // ignore: use_build_context_synchronously
                                   context,
                                   '✅ Account log in successfully',
                                 );
+                            if (!mounted) return;
+                            Navigator.pushNamed(
+                              context,
+                              homePageroute,
+                            );
                           } on FirebaseAuthException catch (
                             e
                           ) {
@@ -146,7 +158,6 @@ class _LoginScreenState
                             }
                             WidgetsOfLogin()
                                 .buildScaffoldMessenger(
-                                  // ignore: use_build_context_synchronously
                                   context,
                                   errorMessage,
                                 );
