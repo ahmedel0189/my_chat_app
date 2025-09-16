@@ -13,14 +13,16 @@ class HomePageScreen extends StatelessWidget {
       TextEditingController();
 
   HomePageScreen({super.key});
-  CollectionReference massages = FirebaseFirestore
-      .instance
-      .collection('massages');
+    final CollectionReference messagesCollection =
+      FirebaseFirestore.instance.collection('messages');
+final messagesQuery  = FirebaseFirestore.instance
+    .collection('messages')
+    .orderBy('createdAt',descending: false);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: massages.snapshots(),
+      stream: messagesQuery .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MassageModel> massageList = [];
@@ -60,7 +62,7 @@ class HomePageScreen extends StatelessWidget {
                     if (messageController
                         .text
                         .isNotEmpty) {
-                      await massages.add({
+                      await messagesCollection.add({
                         'message':
                             messageController
                                 .text,
