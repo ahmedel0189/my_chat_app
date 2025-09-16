@@ -68,14 +68,14 @@ class WidgetsOfLogin {
         ),
         labelText: labelText,
         hintStyle: TextStyle(
-          color: MyColor.mySecondaryTextColor,
+          color: MyColor.mygery,
         ),
         hintText: hintText,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
             color: MyColor
-                .mySecondaryTextColor, // لون البوردر العادي
+                .mygery, // لون البوردر العادي
             width: 2.0,
             // سمك البوردر العادي
           ),
@@ -84,12 +84,12 @@ class WidgetsOfLogin {
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
             color: MyColor
-                .mySecondaryTextColor, // لون البوردر وقت الفوكس
+                .mygery, // لون البوردر وقت الفوكس
             width: 3.0, // سمك البوردر وقت الفوكس
           ),
         ),
       ),
-      cursorColor: MyColor.mySecondaryTextColor,
+      cursorColor: MyColor.mygery,
       style: TextStyle(
         color: MyColor.myTextColor,
       ),
@@ -137,9 +137,7 @@ class WidgetsOfLogin {
           serviceText == 'Log In'
               ? "Already have an account?"
               : "Don't have an account?",
-          style: TextStyle(
-            color: MyColor.mySecondaryTextColor,
-          ),
+          style: TextStyle(color: MyColor.mygery),
         ),
         GestureDetector(
           onTap: () {
