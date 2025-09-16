@@ -1,11 +1,11 @@
 import 'package:a_chat/constants/my_color.dart';
+import 'package:a_chat/layers/data/model/massage_model.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsOfHomePage {
   Widget buildMassageTextField({
     required VoidCallback onPressed,
-        required TextEditingController controller,
-
+    required TextEditingController controller,
   }) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -47,7 +47,7 @@ class WidgetsOfHomePage {
   }
 
   Widget buildBubbleMassage({
-    required String message,
+    required MassageModel message,
     required bool
     isMe, // true لو أنا اللي باعت الرسالة
   }) {
@@ -83,7 +83,7 @@ class WidgetsOfHomePage {
           ),
         ),
         child: Text(
-          message,
+          message.massgae,
           style: TextStyle(
             color: isMe
                 ? Colors.white

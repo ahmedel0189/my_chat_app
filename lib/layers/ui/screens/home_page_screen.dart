@@ -19,8 +19,8 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: massages.get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: massages.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MassageModel> massageList = [];
@@ -42,21 +42,16 @@ class HomePageScreen extends StatelessWidget {
             body: Column(
               children: [
                 Expanded(
-                  child: ListView(
-                    children: [
-                      WidgetsOfHomePage()
+                  child: ListView.builder(
+                    itemCount: massageList.length,
+                    itemBuilder: (context, index) {
+                      return WidgetsOfHomePage()
                           .buildBubbleMassage(
                             message:
-                                'Hi ,My name is Ahmed',
+                                massageList[index],
                             isMe: true,
-                          ),
-                      WidgetsOfHomePage()
-                          .buildBubbleMassage(
-                            message:
-                                'Hi Ahmed,My Name Is Mona',
-                            isMe: false,
-                          ),
-                    ],
+                          );
+                    },
                   ),
                 ),
                 WidgetsOfHomePage().buildMassageTextField(
