@@ -9,20 +9,44 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
 class HomePageScreen extends StatelessWidget {
+  final String email;
   final TextEditingController messageController =
       TextEditingController();
+  final ScrollController scrollController =
+      ScrollController();
 
-  HomePageScreen({super.key});
-    final CollectionReference messagesCollection =
-      FirebaseFirestore.instance.collection('messages');
-final messagesQuery  = FirebaseFirestore.instance
-    .collection('messages')
-    .orderBy('createdAt',descending: false);
+  HomePageScreen({super.key, required this.email});
+  final CollectionReference messagesCollection =
+      FirebaseFirestore.instance.collection(
+        'messages',
+      );
+  final messagesQuery = FirebaseFirestore.instance
+      .collection('messages')
+      .orderBy('createdAt', descending: false);
+  void scrollToBottom() {
+    // عشان يدي فرصة للـ ListView يبني الأول
+    Future.delayed(
+      const Duration(milliseconds: 300),
+      () {
+        if (scrollController.hasClients) {
+          scrollController.animateTo(
+            scrollController
+                .position
+                .maxScrollExtent,
+            duration: const Duration(
+              milliseconds: 300,
+            ),
+            curve: Curves.easeOut,
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: messagesQuery .snapshots(),
+      stream: messagesQuery.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MassageModel> massageList = [];
@@ -37,6 +61,10 @@ final messagesQuery  = FirebaseFirestore.instance
               ),
             );
           }
+          WidgetsBinding.instance
+              .addPostFrameCallback(
+                (_) => scrollToBottom(),
+              );
           return Scaffold(
             appBar: CustomAppbar(
               appBarTitle: appName,
@@ -45,13 +73,14 @@ final messagesQuery  = FirebaseFirestore.instance
               children: [
                 Expanded(
                   child: ListView.builder(
+                    controller: scrollController,
                     itemCount: massageList.length,
                     itemBuilder: (context, index) {
                       return WidgetsOfHomePage()
                           .buildBubbleMassage(
                             message:
                                 massageList[index],
-                            isMe: true,
+                            isMe: massageList[index].id == email,
                           );
                     },
                   ),
@@ -68,9 +97,10 @@ final messagesQuery  = FirebaseFirestore.instance
                                 .text,
                         'createdAt':
                             FieldValue.serverTimestamp(),
+                          'id':email
                       });
-                      messageController
-                          .clear(); // يمسح التكست بعد الإرسال
+                      messageController.clear();
+                      scrollToBottom();
                     }
                   },
                 ),

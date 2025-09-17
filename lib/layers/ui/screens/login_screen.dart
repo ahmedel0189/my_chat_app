@@ -95,6 +95,7 @@ class _LoginScreenState
                     SizedBox(height: 20),
                     WidgetsOfLogin().buildLoginButton(
                       'Log in',
+
                       onTap: () async {
                         if (formKey.currentState!
                             .validate()) {
@@ -129,6 +130,10 @@ class _LoginScreenState
                             Navigator.pushNamed(
                               context,
                               homePageroute,
+                              arguments:
+                                  emailController
+                                      .text
+                                      .trim(),
                             );
                           } on FirebaseAuthException catch (
                             e

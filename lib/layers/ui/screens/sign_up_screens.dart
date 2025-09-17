@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class SignUpScreens extends StatefulWidget {
+  // final String email;
   const SignUpScreens({super.key});
 
   @override
@@ -144,6 +145,10 @@ class _SignUpScreensState
                             Navigator.pushNamed(
                               context,
                               homePageroute,
+                              arguments:
+                                  emailController
+                                      .text
+                                      .trim(),
                             );
                           } on FirebaseAuthException catch (
                             e

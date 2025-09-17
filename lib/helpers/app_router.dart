@@ -18,8 +18,11 @@ class AppRouter {
           builder: (_) => const SignUpScreens(),
         );
       case homePageroute:
+        final String loginEmail =
+            setting.arguments as String;
         return MaterialPageRoute(
-          builder: (_) =>  HomePageScreen(),
+          builder: (_) =>
+              HomePageScreen(email: loginEmail),
         );
     }
   }
